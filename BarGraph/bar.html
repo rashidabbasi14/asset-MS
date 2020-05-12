@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<script type="text/javascript">
+	window.onload = function ()
+	{			
+		url: "Barchart.php",
+			method:"GET",
+			success:function(data1)
+			{
+				var data = JSON.parse(data1);
+				console.log(data);
+				var player =[];
+				var score =[];
+				
+				for(var i in data)
+				{
+					player.push("Laptop");
+					score.push(data[i].price);
+				}
+				var chart = new CanvasJS.Chart("chartContainer",
+				{
+				  title: {
+					text: "Axis Y with interval 20"
+				  },
+				  axisY:{
+				   interval: 20
+				 },
+				  data: [
+				  {
+					type: "column",
+					dataPoints: [
+					{ x: 100, y: 71 },
+					{ x: 200, y: 55},
+					{ x: 300, y: 50 },
+					{ x: 400, y: 65 },
+					{ x: 500, y: 95 },
+					{ x: 600, y: 68 },
+					{ x: 700, y: 28 },
+					{ x: 800, y: 34 },
+					{ x: 900, y: 14}
+					]
+				  }
+				  ]
+				});
+
+				chart.render();
+						/*
+						var chartdata = 
+						{
+							labels: player,
+							axisY:{
+							   interval: 5000
+							 },
+							datasets: 
+							[{
+								label: 'Price',
+								backgroundColor: 'rgba(200,200,200,0.75)',
+								borderColor: 'rgba(200,200,200,0.75)',
+								hoverBackgroundColor: 'rgba(200,200,200,1)',
+								hoverBorderColor: 'rgba(200,200,200,1)',
+								data: score
+							}]
+							
+						};
+						var ctx = $('#mycanvas');
+						
+						var barGraph = new Chart(ctx, {
+							type: 'bar',
+							data: chartdata
+						});
+						barGraph.render();
+						*/
+					},
+					error: function(data){
+						console.log(data);
+					}
+			});
+	</script>
+  
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+<body>
+  <div id="chartContainer" style="height: 300px; width: 100%;">
+  </div>
+</body>
+</html>
